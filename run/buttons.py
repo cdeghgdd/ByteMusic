@@ -89,21 +89,17 @@ class Buttons:
                 return [
                     [Button.inline("🔸 Auto", data=b"setting/core/auto")],
                     [Button.inline("YoutubeDL", b"setting/core/youtubedl")],
-                    [Button.inline("SpotDL", b"setting/core/spotdl")],
                     [Buttons.back_button, Buttons.back_button_to_setting],
                 ]
-            case "SpotDL":
                 return [
                     [Button.inline("Auto", data=b"setting/core/auto")],
                     [Button.inline("YoutubeDL", b"setting/core/youtubedl")],
-                    [Button.inline("🔸 SpotDL", b"setting/core/spotdl")],
                     [Buttons.back_button, Buttons.back_button_to_setting],
                 ]
             case "YoutubeDL":
                 return [
                     [Button.inline("Auto", data=b"setting/core/auto")],
                     [Button.inline("🔸 YoutubeDL", b"setting/core/youtubedl")],
-                    [Button.inline("SpotDL", b"setting/core/spotdl")],
                     [Buttons.back_button, Buttons.back_button_to_setting],
                 ]
 

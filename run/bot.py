@@ -1,5 +1,5 @@
 from utils import BroadcastManager, db, asyncio, sanitize_query, TweetCapture
-from plugins import SpotifyDownloader, ShazamHelper, X, Insta, YoutubeDownloader
+from plugins import YoutubeDownloader
 from run import events, Button, MessageMediaDocument, update_bot_version_user_season, is_user_in_channel, \
     handle_continue_in_membership_message
 from run import Buttons, BotMessageHandler, BotState, BotCommandHandler, respond_based_on_channel_membership
@@ -14,8 +14,6 @@ class Bot:
             Bot.initialize_spotify_downloader()
             await Bot.initialize_database()
             Bot.initialize_shazam()
-            Bot.initialize_x()
-            Bot.initialize_instagram()
             Bot.initialize_youtube()
             Bot.initialize_messages()
             Bot.initialize_buttons()
@@ -27,7 +25,6 @@ class Bot:
     @staticmethod
     def initialize_spotify_downloader():
         try:
-            SpotifyDownloader.initialize()
             print("Plugins: Spotify downloader initialized.")
         except Exception as e:
             print(f"An error occurred while initializing Spotify downloader: {str(e)}")
@@ -44,7 +41,6 @@ class Bot:
     @staticmethod
     def initialize_shazam():
         try:
-            ShazamHelper.initialize()
             print("Plugins: Shazam initialized.")
         except Exception as e:
             print(f"An error occurred while initializing Shazam helper: {str(e)}")
@@ -114,7 +110,6 @@ class Bot:
             b"setting/quality/flac": lambda e: asyncio.create_task(Bot.change_music_quality(e, "flac", "693")),
             b"setting/core": lambda e: asyncio.create_task(BotMessageHandler.edit_core_setting_message(e)),
             b"setting/core/auto": lambda e: asyncio.create_task(Bot.change_downloading_core(e, "Auto")),
-            b"setting/core/spotdl": lambda e: asyncio.create_task(Bot.change_downloading_core(e, "SpotDL")),
             b"setting/core/youtubedl": lambda e: asyncio.create_task(Bot.change_downloading_core(e, "YoutubeDL")),
             b"setting/subscription": lambda e: asyncio.create_task(
                 BotMessageHandler.edit_subscription_status_message(e)),
@@ -506,11 +501,11 @@ class Bot:
                 await event.respond("Sorry, I can only process:\n-Text\n-Voice\n-Link")
         elif YoutubeDownloader.is_youtube_link(event.message.text):
             await Bot.process_youtube_link(event)
-        elif SpotifyDownloader.is_spotify_link(event.message.text):
+        elif False:
             await Bot.process_spotify_link(event)
-        elif X.contains_x_or_twitter_link(event.message.text):
+        elif False:
             await Bot.process_x_or_twitter_link(event)
-        elif Insta.is_instagram_url(event.message.text):
+        elif False:
             await Insta.download(Bot.Client, event)
         elif not event.message.text.startswith('/'):
             await Bot.process_text_query(event)
